@@ -91,6 +91,6 @@ def mostrar_tabla_arp():
         print("Error al obtener la tabla ARP:", e)
 
 # Corregir la línea de inicialización
-if __name__ == "_main_":
+if __name__ == "__main__":
     programa_principal(sys.argv[1:])
  
