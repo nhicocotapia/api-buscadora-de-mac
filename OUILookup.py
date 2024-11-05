@@ -6,11 +6,6 @@ import getopt
 import requests
 import subprocess
 
-import sys
-import getopt
-import requests
-import subprocess
-
 def programa_principal(argumentos):
     mac_a_buscar = None
     mostrar_arp = False
