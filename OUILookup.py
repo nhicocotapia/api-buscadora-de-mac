@@ -65,7 +65,7 @@ def buscar_mac(direccion_mac):
 def mostrar_tabla_arp():
     try:
         salida_arp = subprocess.check_output("arp -a", shell=True).decode('latin-1')
-        print("IP/MAC/Fabricante:")
+        print("IP / MAC / Fabricante:")
 
         # Procesar las primeras 10 líneas que contienen direcciones MAC válidas
         lineas_arp = salida_arp.splitlines()
@@ -73,14 +73,18 @@ def mostrar_tabla_arp():
         for linea in lineas_arp:
             componentes = linea.split()
             if len(componentes) >= 2 and '-' in componentes[1]:
+                ip = componentes[0]  # La IP es el primer componente en la línea
                 mac_en_arp = componentes[1].replace('-', ':')
-                
+
                 # Omitir direcciones de difusión y multidifusión
                 if mac_en_arp.startswith("ff:ff:ff:ff:ff:ff") or mac_en_arp.startswith("01:00:5e"):
                     continue
 
                 # Obtener el fabricante para cada MAC
-                buscar_mac(mac_en_arp)
+                fabricante = buscar_mac(mac_en_arp)
+                
+                # Mostrar la IP, MAC y el fabricante
+                print(f"{ip} / {mac_en_arp} / {fabricante}")
                 
                 # Incrementar el contador y detenerse después de 10 MACs
                 contador += 1
